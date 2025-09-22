@@ -1,0 +1,31 @@
+name: CI
+on:
+push:
+pull_request:
+
+
+jobs:
+build:
+strategy:
+matrix:
+os: [ubuntu-22.04, macos-13, windows-2022]
+runs-on: ${{ matrix.os }}
+steps:
+- uses: actions/checkout@v4
+- name: Setup CMake
+uses: lukka/get-cmake@v3.29.5
+- name: Configure
+run: cmake -S . -B build -DV8_ROOT=$GITHUB_WORKSPACE/third_party/v8
+- name: Build
+run: cmake --build build --config Release --parallel
+- name: Test run (TS)
+run: |
+cd build
+./orchestrator --run tenantA ../examples/hello_ts/app.ts || exit 1
+shell: bash
+if: runner.os != 'Windows'
+- name: Test run (TS) Windows
+run: |
+cd build
+.\Release\orchestrator.exe --run tenantA ..\examples\hello_ts\app.ts
+if: runner.os == 'Windows'
