@@ -1,2 +1,12 @@
-# Cross-Platform-Runtime-Orchestrator
-A lightweight, multi-tenant runtime that embeds V8 (and optionally Node.js) to execute TypeScript/JavaScript apps across Windows, Linux, and macOS. Includes process isolation via per-tenant V8 Isolates, a simple scheduler, Chromium DevTools Protocol (via V8 Inspector) for live debugging, and Win32-specific thread scheduling optimizations.
+# Orchestrator
+
+
+## Features
+- V8 embedded per-tenant isolates (isolation & multi-tenancy)
+- On-the-fly TypeScript transpile (naive implementation; swap with esbuild/ts)
+- (Optional) Node.js embedding via `libnode`
+- Chromium DevTools Protocol exposure via V8 Inspector (stubbed; wire WS server)
+- Windows thread scheduling tweaks for parity with Linux/macOS
+
+
+## Build
