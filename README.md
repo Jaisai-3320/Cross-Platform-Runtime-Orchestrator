@@ -42,13 +42,14 @@ The system provides:
 
 ## Workflow
 
-```mermaid
+``` mermaid
 flowchart TD
     A[Host Orchestrator] --> B[Tenant Manager]
     B -->|Creates| C[V8 Isolate]
-    B -->|Creates (optional)| D[Node.js Context]
+    B -->|Creates optional| D[Node.js Context]
     C --> E[TypeScript Transpiler]
     E --> F[Execution Engine]
     D --> F
     F --> G[Result Capture]
     F --> H[DevTools Inspector]
+
